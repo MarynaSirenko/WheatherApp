@@ -1,4 +1,4 @@
-#from requests import request
+from requests import request
 import requests
 from django.shortcuts import render
 from .models import City
@@ -6,12 +6,11 @@ from .forms import CityForm
 
 
 def index(request):
-    appid = '19b818fecab72ccd0d8badaf71d418b5'
+    api_wheather_token = '19b818fecab72ccd0d8badaf71d418b5'
 
-    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + api_wheather_token
 
-
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         form = CityForm(request.POST)
         form.save()
 
@@ -35,10 +34,3 @@ def index(request):
 
     context = {'all_info': all_cities, 'form': form}
     return render(request, 'weather/index.html', context)
-
-
-
-
-
-
-
